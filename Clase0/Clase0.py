@@ -9,6 +9,23 @@ def imprimir_matriz(matriz):
         print()
     print(f"{(dimension*2+1)*'-'}")
 
+def rellenar_contorno(matriz, N, character):
+    # matriz: Matriz con la que se va a trabajar, debe ser cuadrada, no se verifica esto ultimo, por favor asegurar esto o de lo contrario obtendra un error de indice probablemente.
+    # N: hace referencia al contorno que se rellenara dado la matriz NxN que produzca. Ejemplo: Si N=5 y la matriz es de 9x9, esta funcion rellenara el contorno de la matriz 5x5 que este dentro de la matriz 9x9.
+    
+    dimension_matriz = len(matriz)
+    diff_dimension = (dimension_matriz - N) // 2
+    range_tuple = ((diff_dimension),dimension)
+
+    for e,row in enumerate(matriz):
+        if e == diff_dimension or e == (dimension_matriz - diff_dimension - 1):
+            for i in range(diff_dimension, dimension_matriz - diff_dimension):
+                row[i] = character if row[i] != 1 else row[i]
+
+        if e >= diff_dimension and (dimension_matriz - diff_dimension - 1) >= e:
+            row[diff_dimension] = character if row[diff_dimension] != 1 else row[diff_dimension]
+            row[dimension_matriz - diff_dimension - 1] = character if row[dimension_matriz - diff_dimension - 1] != 1 else row[dimension_matriz - diff_dimension - 1]
+
 while True:
     try: # Usamos un try para evitar que nuestro codigo se rompa si el usuario ingreso algo diferente a un numero. Si no entiende su funcion en este extracto de codigo, comentelo y pruebe ingresando en el input su nombre o un caracter no numerico.
         dimension = int(input("Ingrese un numero impar mayor que 0: "))
@@ -38,11 +55,7 @@ for i in range(dimension):
 imprimir_matriz(matriz)
 
 # De la misma forma podemos rellenar el contorno 
-matriz[0][:] = [8 if matriz[0][i] != 1 else matriz[0][i] for i in range(dimension)]
-matriz[dimension - 1][:] = [8 if matriz[dimension - 1][i] != 1 else matriz[dimension - 1][i] for i in range(dimension)]
-
-for row in matriz:
-    row[0] = 8 if row[0] != 1 else row[0]
-    row[dimension - 1] = 8 if row[dimension - 1] != 1 else row[dimension - 1]
-
+rellenar_contorno(matriz, 9, 8)
+imprimir_matriz(matriz)
+rellenar_contorno(matriz, 5, input("Ingrese un caracter: "))
 imprimir_matriz(matriz)
