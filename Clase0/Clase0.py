@@ -15,7 +15,6 @@ def rellenar_contorno(matriz, N, character):
     
     dimension_matriz = len(matriz)
     diff_dimension = (dimension_matriz - N) // 2
-    range_tuple = ((diff_dimension),dimension)
 
     for e,row in enumerate(matriz):
         if e == diff_dimension or e == (dimension_matriz - diff_dimension - 1):
@@ -57,5 +56,5 @@ imprimir_matriz(matriz)
 # De la misma forma podemos rellenar el contorno 
 rellenar_contorno(matriz, 9, 8)
 imprimir_matriz(matriz)
-rellenar_contorno(matriz, 5, input("Ingrese un caracter: "))
+rellenar_contorno(matriz, 7, input("Ingrese un caracter: "))
 imprimir_matriz(matriz)
